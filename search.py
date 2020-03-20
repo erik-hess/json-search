@@ -1,17 +1,6 @@
 import sys
 import glob
 import json
-from pprint import pprint
-# json_data=open('bookmarks.json')
-# jdata = json.load(json_data)
-# pprint (jdata)
-# json_data.close()
-
-
-# jdata = json.load('{"uri": "http:", "foo", "bar"}')
-# >>> 'uri' in jdata       # Check if 'uri' is in jdata's keys
-# True
-# >>> jdata['uri']
 
 def search_zendesk():
     filelist = get_filelist()
@@ -43,25 +32,34 @@ def search_zendesk():
 
     print("Searching " + filelist[file_index].capitalize().replace(".json", "") + " for " + search_term + " with a value of " + search_value)
 
-    search_json(jdata, search_term, search_value)
+    search_results = search_json(jdata, search_term, search_value)
+    print(search_results)
+    if (len(search_results) == 0):
+        print("No results found")
+    else:
+        for entry in search_results:
+            print_json_results(entry)
 
 def search_json(json_data, term, value):
-    found_results = False
+    results = []
     for entry in json_data:
         if (term in entry):
-            if (str(value) == str(entry[term])):
-                print_json_results(entry)
-                found_results = True
-            elif (not value):
+            # Need to handle special cases as python json alters boolean values (true/falase) to (True/False)
+            if (type(entry[term]) == bool):
+                if (str(value).lower() == str(entry[term]).lower()):
+                    results.append(entry)
+            elif (str(value) == str(entry[term])):
+                results.append(entry)
+            # Need to handle special cases as python json alters null values None
+            # Handle blank search values as well as searches for null value
+            elif (not value or value == "null"):
                 if ("None" == str(entry[term])):
-                    print_json_results(entry)
-                    found_results = True
-        else:
-            print("Invalid key entered.  Please select a valid key value.")
-            sys.exit()
+                    results.append(entry)
+            elif (type(entry[term]) == list):
+                if (str(value) in entry[term]):
+                    results.append(entry)
     
-    if (not found_results):
-        print("No results found")
+    return results
 
 def view_searchable_fields():
     filelist = get_filelist()
