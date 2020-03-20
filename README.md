@@ -2,7 +2,7 @@
 
 ## Requirements for running
   1. Python3 
-  2. json files in directory execting out of
+  2. json files are in the current directory executing out of, and are name with .json as extension
 
 ## Run Instructions
   ```bash
