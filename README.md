@@ -46,7 +46,7 @@
   _id
   Enter search value:
   126
-  Searching Temp/organizations for _id with a value of 126
+  Searching Organizations for _id with a value of 126
   {
     "_id": 126,
     "url": "http://initech.zendesk.com/api/v2/organizations/126.json",
@@ -68,6 +68,32 @@
       "Trevino"
     ]
   }
+  ```
+
+  ```bash
+  python3 ../search.py
+  Welcome to Zendesk Search
+  Type 'quit' to exit at any time. Press Enter to continue...
+
+  Select search options:
+    1) Search Zendesk
+    2) View a list of searchable fields
+    Type 'quit' to exit
+
+  1
+  Select from below options:
+    1) Organizations
+    2) Users
+    3) Tickets
+
+  1
+  Searching file: organizations.json
+  Enter search term:
+  tags
+  Enter search value:
+  asdf
+  Searching Organizations for tags with a value of asdf
+  No results found
   ```
 
 ## Unit Test Run Instructions

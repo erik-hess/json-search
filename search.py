@@ -32,7 +32,7 @@ def search_zendesk():
     search_term = get_input("Enter search term:")
     search_value = get_input("Enter search value:")
 
-    print("Searching " + filelist[file_index].capitalize().replace(".json", "") + " for " + search_term + " with a value of " + search_value)
+    print("Searching " + (ntpath.basename(filelist[file_index])).capitalize().replace(".json", "") + " for " + search_term + " with a value of " + search_value)
 
     search_results = search_json(jdata, search_term, search_value)
 
@@ -67,7 +67,7 @@ def view_searchable_fields():
     filelist = get_filelist()
     for file in filelist:
         print("-----------------------------------")
-        print("Search "+ file.capitalize().replace(".json", "") + " with")
+        print("Search "+ (ntpath.basename(file)).capitalize().replace(".json", "") + " with")
         list_json_keys(file)
         print()
 
