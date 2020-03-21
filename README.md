@@ -14,12 +14,14 @@
   * Assumes boolean json fields are compared ignoring case
   * Assumes json list values are searched individually (ie search for key tags and value '1' on 'tags': ['1', '2'] will match as comparisons search value against '1' and then '2')
 
-## Run Instructions
+## Usage
+
+### Instructions
   ```bash
   python3 search.py
   ```
 
-## Run Examples
+### Examples
   ```bash
   python3 search.py
   Welcome to Zendesk Search
@@ -96,11 +98,12 @@
   No results found
   ```
 
-## Unit Test Run Instructions
+## Unit Tests
+### Run Instructions
   ```bash
   python3 test_search.py
   ```
-### Unit Test Example
+### Example
  ```bash
   python3 test_search.py
   .......
