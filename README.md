@@ -15,8 +15,7 @@
   * Assumes json list values are searched individually (ie search for key tags and value '1' on 'tags': ['1', '2'] will match as comparisons search value against '1' and then '2')
 
 ## Usage
-
-### Instructions
+### Run Instructions
   ```bash
   python3 search.py
   ```
