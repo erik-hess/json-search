@@ -1,17 +1,19 @@
 import sys
 import glob
 import json
+import ntpath
 
 def search_zendesk():
     filelist = get_filelist()
 
+    # Display list of json files found in file list and prompt user to select one of them
     input_value = None
     while True:
         try:
             print("Select from below options:")
             for file in filelist:
                 index = filelist.index(file) + 1
-                print("\t" + str(index) + ") " + file.capitalize().replace(".json", ""))
+                print("\t" + str(index) + ") " + (ntpath.basename(file)).capitalize().replace(".json", ""))
     
             input_value = int(get_input(""))
             if (input_value > 0 and input_value <= len(filelist)):
@@ -33,7 +35,7 @@ def search_zendesk():
     print("Searching " + filelist[file_index].capitalize().replace(".json", "") + " for " + search_term + " with a value of " + search_value)
 
     search_results = search_json(jdata, search_term, search_value)
-    print(search_results)
+
     if (len(search_results) == 0):
         print("No results found")
     else:
@@ -86,9 +88,17 @@ def list_json_keys(filename):
         print(x)
 
 def get_filelist():
-    # Return list of all json files in current directory
-    return glob.glob("*.json")
-
+    # Return list of all json files in current directory if not found prompt user for path. 
+    # Either absolute or relative will work
+    filelist = glob.glob("*.json")
+    while (len(filelist) == 0):
+        filepath = get_input("Unable to find json files.  Please enter path to json files. Type 'quit' to exit.")
+        if (not filepath.endswith('/')):
+            filepath = filepath + '/'
+        filelist = glob.glob(filepath + "*.json")
+    
+    return filelist
+    
 def main_options():
     print("Select search options:")
     print("\t1) Search Zendesk")
