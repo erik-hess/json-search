@@ -2,7 +2,7 @@
 
 ## Requirements for running
   1. Running application on Mac or Linux
-  2. Python3 
+  2. Python3 installed
   3. json files named with .json as extension
 
 ## Output
